@@ -169,9 +169,8 @@ def _print_reviews(reviews, country):
         sumRank = 0
         for review in reviews:
             review_text = "%s by %s\t" % (review["version"], review["user"])
-            for i in range(review["rank"]):
-                review_text += "*" # to avoid space or newline after print
-            review_text += " (%s) %s" % (review["topic"], review["review"])
+            review_text += str(review["rank"]) # to avoid space or newline after print
+            review_text += "\t (%s) %s" % (review["topic"], review["review"])
             print review_text
             sumRank += review["rank"]
         print "Number of reviews in %s: %d, avg rank: %.2f\n" % (country, len(reviews), 1.0*sumRank/len(reviews))

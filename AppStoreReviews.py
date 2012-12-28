@@ -168,9 +168,12 @@ def _print_reviews(reviews, country):
         for review in reviews:
             review_text = "%s\t%s\t" % (review["version"], review["user"])
             review_text += str(review["rank"]) # to avoid space or newline after print
-            review_text += "\t (%s) %s" % (review["topic"], ' '.join(review["review"].split()))
+            review_text += "\t (%s) %s" % (review["topic"].encode('utf-8'), ' '.join(review["review"].encode('utf-8').split()))
             review_text += "\t%s" % country
-            print review_text
+	    try:
+            	print review_text.encode('utf-8')
+	    except:
+		print 'Could not read text!'
             sumRank += review["rank"]
         print "Number of reviews in %s: %d, avg rank: %.2f\n" % (country, len(reviews), 1.0*sumRank/len(reviews))
         return (len(reviews), sumRank)
